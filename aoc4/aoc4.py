@@ -10,18 +10,15 @@ def score(n):
     return 0 if n == 0 else 2**(n-1)
 
 
-data = []
+counts = []
 for line in open('input.txt'):
     p1, p2 = line.split(':')    
     p2, p3 = p2.split('|')
-    data.append((set(map(int, p2.split())), set(map(int, p3.split()))))
-n = len(data)
-
-counts = [len(x&y) for x, y in data]
+    counts.append(len(set(map(int, p2.split())) & set(map(int, p3.split()))))
+n = len(counts)
 
 print('Part 1:', sum(map(score, counts)))
 
-result = 0
 cards = [1]*n
 for c in range(n):
     for i in range(counts[c]):
