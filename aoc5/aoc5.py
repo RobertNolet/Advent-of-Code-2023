@@ -14,21 +14,21 @@ def solve(seedranges, data):
         while seedranges:
             start, end = seedranges.pop()
             for dst, src, rng in maps:
-                if src <= start and end < src+rng:
+                if src <= start < end < src+rng:
                     # Entire range gets mapped
                     newseedranges.append((dst + start - src, dst + end - src))
                     break
-                if src <= start < src+rng and src+rng <= end:
+                if src <= start < src+rng <= end:
                     # Left part gets mapped
                     newseedranges.append((dst + start - src, dst + rng))
                     seedranges.append((src+rng, end))
                     break
-                if start < src and src < end < src+rng:
+                if start < src < end < src+rng:
                     # Right part gets mapped
                     newseedranges.append((dst, dst + end - src))
                     seedranges.append((start, src))
                     break
-                if start < src and src+rng <= end:
+                if start < src < src+rng <= end:
                     # Middle part gets mapped
                     newseedranges.append((dst, dst+rng))
                     seedranges.append((start, src))
