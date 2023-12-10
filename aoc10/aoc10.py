@@ -6,12 +6,6 @@ Created on Sun Dec 10 09:56:04 2023
 @author: robertnolet
 """
 
-def findstart(data):
-    for i in range(len(data)):
-        for j in range(len(data[0])):
-            if data[i][j] == 'S':
-                return i,j
-
 
 pipes = {'|':{(-1, 0),(+1, 0)},
          '-':{( 0,+1),( 0,-1)},
@@ -22,8 +16,10 @@ pipes = {'|':{(-1, 0),(+1, 0)},
          '.':set()}
 
 data = [line.strip() for line in open('input.txt')]
+n = len(data)
+m = len(data[0])
 
-i, j = findstart(data)
+i, j = next((i,j) for i in range(n) for j in range(m) if data[i][j] == 'S')
 for t, ds in pipes.items():
     if all((-di,-dj) in pipes[data[i+di][j+dj]] for (di,dj) in ds):
         starttile = t
@@ -45,9 +41,9 @@ opps = {'L':'7',
         'F':'J'}
 
 area = 0
-for i in range(len(data)):
+for i in range(n):
     inside = False
-    for j in range(len(data[0])):
+    for j in range(m):
         tile = data[i][j]
         if tile == 'S':
             tile = starttile
