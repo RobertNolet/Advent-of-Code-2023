@@ -48,13 +48,10 @@ for i in range(n):
         if tile == 'S':
             tile = starttile
         if (i,j) in loop:
-            if tile == '|':
-                inside = not inside
-            elif tile in 'LF':
+            if tile in 'LF':
                 start = tile
-            elif tile in '7J':
-                if tile == opps[start]:
-                    inside = not inside
+            elif tile == '|' or tile == opps[start]:
+                inside = not inside
         else:
             if inside:
                 area += 1
