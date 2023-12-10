@@ -37,23 +37,19 @@ while data[i][j] != 'S':
     
 print('Part 1:', len(loop)//2)
 
-opps = {'L':'7',
-        'F':'J'}
+opps = {'L':'7', 'F':'J'}
 
 area = 0
 for i in range(n):
     inside = False
     for j in range(m):
-        tile = data[i][j]
-        if tile == 'S':
-            tile = starttile
+        tile = data[i][j] if data[i][j] != 'S' else starttile
         if (i,j) in loop:
             if tile in 'LF':
                 start = tile
             elif tile == '|' or tile == opps[start]:
                 inside = not inside
-        else:
-            if inside:
-                area += 1
+        elif inside:
+            area += 1
                 
 print('Part 2:', area)
