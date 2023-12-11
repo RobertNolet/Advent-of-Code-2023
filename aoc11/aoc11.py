@@ -18,8 +18,8 @@ stars = np.argwhere(data == '#')
 
 def dist(i1,j1,i2,j2, mul=2):
     di = abs(i2-i1) + (mul-1)*sum(min(i1,i2) < r < max(i1,i2) for r in emptyrows)
-    dj = abs(j2-j1) + (mul-1)*sum(min(j1,j2) < r < max(j1,j2) for c in emptycols)
+    dj = abs(j2-j1) + (mul-1)*sum(min(j1,j2) < c < max(j1,j2) for c in emptycols)
     return di+dj
 
-print('Part 1:', sum(dist(i1,j1,i2,j2) for (i1,j1), (i2,j2) in combinations(stars,2)))
-print('Part 2:', sum(dist(i1,j1,i2,j2, 1000000) for (i1,j1), (i2,j2) in combinations(stars,2)))
+print('Part 1:', sum(dist(*s1,*s2) for s1, s2 in combinations(stars,2)))
+print('Part 2:', sum(dist(*s1,*s2, 1000000) for s1, s2 in combinations(stars,2)))
